@@ -1,36 +1,44 @@
 @extends('layouts.app')
 @section('content')
- {{-- Validation error, for invalid incoming data display logic --}}
- {{-- @if ($errors->any())
- <div>
-     @foreach ($errors->all() as $error)
-         <p style="color: red">{{ $error }}</p>
-     @endforeach
- </div>
-@endif --}}
+
+{{-- Auto responds when deleting/updating/adding information --}}
+@if (session('status_success'))
+<p style="color: green"><b>{{ session('status_success') }}</b></p>
+@else
+<p style="color: red"><b>{{ session('status_error') }}</b></p>
+@endif
 
     @foreach ($projects as $project)
         <h1>{{ $project['title'] }}</h1>
         <p>{{ $project['text'] }}</p>
         <p style="font-size: 10px">Comment count: {{ count($project->comments) }} 
-            | <a href="{{ route('projects.show', $project['id']) }}">View post details and comment on it</a></p>
+            | <a href="{{ route('projects.show', $project['id']) }}">View project details and comment on it</a>
+            | Author: {{ $project['user']['name'] }} , {{ $project['user']['email'] }}</p>
    {{-- Hide buttons if the user is not logged in  --}}
    @if (auth()->check())
    <div class="btn-group" style="overflow: auto">
-       <form style='float: left;' action="{{ route('projects.destroy', $project['id']) }}" method="POST">
-           @method('DELETE') @csrf
-           <input class="btn btn-danger" type="submit" value="DELETE"> 
-       </form>
+
+    @if (auth()->user()->id === $project['user_id'])
+
+    <form style='float: left;' action="{{ route('projects.destroy', $project['id']) }}" method="POST">
+        @method('DELETE') @csrf
+        <input class="btn btn-danger"  type="submit" value="DELETE">
+    </form>
+@endif
        &nbsp;
+       @if (auth()->user()->id === $project['user_id'])
+
        <form style='float: left;' action="{{ route('projects.show', $project['id']) }}" method="GET">
            <input class="btn btn-primary" type="submit" value="UPDATE">
        </form>
+       @endif
    </div>
 @endif
 
     
 
     @endforeach
+    @if (auth()->check())
     <form method="POST" action="/projects">
         @csrf
 
@@ -55,5 +63,5 @@
 
         <input class="btn btn-primary" type="submit" value="Submit">
     </form>
-
+    @endif
 @endsection

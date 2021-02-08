@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
+use Gate;
 
 class ProjectController extends Controller
 {
@@ -17,26 +18,30 @@ class ProjectController extends Controller
     {
         return view('project', ['project' => \App\Models\Project::find($id)]);
     }
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         $this->validate($request, [
             'title' => 'required|unique:projects,title|max:10',
-            'text' => 'required',
             'credit_count' => 'required',
+            'text' => 'required',
         ]);
-        $pb = new \App\Models\Project();
-        $pb->title = $request['title'];
-        $pb->credit_count = $request['credit_count'];
-        $pb->text = $request['text'];
-        return ($pb->save() !== 1) ?
-            redirect('/projects')->with('status_success', 'Project created!') :
+        $bp = new \App\Models\Project();
+        $bp->title = $request['title'];
+        $bp->credit_count = $request['credit_count'];
+        $bp->text = $request['text'];
+        $bp->user_id = auth()->user()->id; // Trying to get property 'id' of non-object
+        return ($bp->save() !== 1) ? 
+            redirect('/projects')->with('status_success', 'Project created!') : 
             redirect('/projects')->with('status_error', 'Project was not created!');
-     }
-    public function destroy($id)
-    {
-        \App\Models\Project::destroy($id);
-        return redirect('/projects')->with('status_success', 'Project deleted!');
     }
+
+    public function destroy($id){
+        if(Gate::denies('delete-project', \App\Models\Project::find($id))) // useris paduodamas automatiškai!!!
+            return redirect()->back()->with('status_error', 'You can\'t delete this post!');
+        \App\Models\Project::destroy($id);
+        return redirect('/projects')->with('status_success', 'Post deleted!');
+    }
+
+
     public function update($id, Request $request)
     {
         $this->validate($request, [
