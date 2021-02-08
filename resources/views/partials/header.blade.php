@@ -18,5 +18,12 @@
       </ul>
   
     </div>
+  </div>
+  {{ Auth::user()['name']}}
+  
+  {{-- {{ Auth::user()['email']}} --}}
+
+</div>
+
   </nav>
   

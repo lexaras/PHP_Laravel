@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectController;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,6 +35,7 @@ Route::post('/projects/{id}/comments', [ProjectController::class, 'storeProjectC
 // });
 
 
+Auth::routes();
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::any('/{any}', function(){ print("404 - No such route, buddy!"); })->where('any', '.*'); //wrong route
-

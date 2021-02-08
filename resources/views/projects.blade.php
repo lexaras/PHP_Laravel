@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.app')
 @section('content')
  {{-- Validation error, for invalid incoming data display logic --}}
  {{-- @if ($errors->any())
@@ -14,17 +14,20 @@
         <p>{{ $project['text'] }}</p>
         <p style="font-size: 10px">Comment count: {{ count($project->comments) }} 
             | <a href="{{ route('projects.show', $project['id']) }}">View post details and comment on it</a></p>
+   {{-- Hide buttons if the user is not logged in  --}}
+   @if (auth()->check())
+   <div class="btn-group" style="overflow: auto">
+       <form style='float: left;' action="{{ route('projects.destroy', $project['id']) }}" method="POST">
+           @method('DELETE') @csrf
+           <input class="btn btn-danger" type="submit" value="DELETE"> 
+       </form>
+       &nbsp;
+       <form style='float: left;' action="{{ route('projects.show', $project['id']) }}" method="GET">
+           <input class="btn btn-primary" type="submit" value="UPDATE">
+       </form>
+   </div>
+@endif
 
-            <div class="btn-group" style="overflow: auto">
-                <form style='float: left;' action="{{ route('projects.destroy', $project['id']) }}" method="POST">
-                    @method('DELETE') @csrf
-                    <input class="btn btn-danger" type="submit" value="DELETE"> 
-                </form>
-                &nbsp;
-                <form style='float: left;' action="{{ route('projects.show', $project['id']) }}" method="GET">
-                    <input class="btn btn-primary" type="submit" value="UPDATE">
-                </form>
-            </div>
     
 
     @endforeach
