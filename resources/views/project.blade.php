@@ -27,9 +27,9 @@
     <input type="text" name="title" value="{{ $project['title'] }}" readonly><br>
     <input type="text" name="text" value="{{ $project['text'] }}" readonly><br>
     <input type="text" name="credit_count" value="{{ $project['credit_count'] }}" readonly><br>
-
+    @endif
 </form>
-@endif
+
 <p style="font-size: 10px; margin-top: 15px">Comments: </p>
 @foreach ($project->comments as $comment)
     <p style="font-size: 10px">{{ $comment['text'] }} {{ $comment['created_at'] }}</p>

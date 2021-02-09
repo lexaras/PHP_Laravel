@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {return view('welcome');})->name('welcome');   //index
-Route::get('/about', function () {return view('about');})->name('about');  //about
-Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');;
+Route::get('/about', function () {return view('about');})->name('about');  //about\
+Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
 Route::get('/projects/{id}', [ProjectController::class, 'show'])->name('projects.show');
 Route::post('/projects', [ProjectController::class, 'store']);
 Route::delete('/projects/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
