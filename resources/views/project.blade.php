@@ -18,7 +18,7 @@
 
 <form action="{{ route('projects.update', $project['id']) }}" method="POST">
     @method('PUT') @csrf 
-    @if (auth()->check())
+    @if (auth()->user()->id === $project['user_id'])
     <input type="text" name="title" value="{{ $project['title'] }}"><br>
     <input type="text" name="text" value="{{ $project['text'] }}"><br>
     <input type="text" name="credit_count" value="{{ $project['credit_count'] }}"><br>
