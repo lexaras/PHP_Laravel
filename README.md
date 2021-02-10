@@ -34,7 +34,6 @@ php artisan key:generate
 # run migrations
 php artisan migrate
 
-<img src="assets/migrate_error.png">
 
 As you noticed one migration failed. To pass it we need to register admin user by hand :
  - name = "admin"
@@ -46,35 +45,10 @@ As you noticed one migration failed. To pass it we need to register admin user b
 
 # run seeders
  php artisan db:seed 
+ 
+```
 
+<img src="assets/migrate_error.png">
 <img src="assets/migrate_working.png">
 
 ## Screenshots
-
-* Login screen
-<img src="assets/login.png">
-
----
-
-* Customers table
-<img src="assets/customers.png">
-
----
-
-* Customer filter
-<img src="assets/customerfilter.png">
-
----
-
-* Countries
-<img src="assets/countries.png">
-
----
-
-* Country
-<img src="assets/country.png">
-
---- 
-
-* Add new city
-<img src="assets/newcity.png">
