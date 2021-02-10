@@ -52,3 +52,27 @@ As you noticed one migration failed. To pass it we need to register admin user b
 <img src="assets/migrate_working.png">
 
 ## Screenshots
+
+* Admin projects view
+<img src="assets/admin_view.png">
+
+---
+* Admin comments view
+<img src="assets/comments.png">
+
+---
+* Admin edit view
+<img src="assets/edit.png">
+
+---
+* User(registered) projects view
+<img src="assets/user_view.png">
+
+---
+* User(registered) comments view
+<img src="assets/user_comments.png">
+
+---
+* Unregistered user  view
+<img src="assets/unregistered_user.png">
+
