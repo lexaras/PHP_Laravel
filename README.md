@@ -6,8 +6,6 @@ PHP Laravel CRUD application to manage projects, users and comments. Only author
 
 <img src="assets/DB.png">
 
-
-
 ## How to install
 
 ```bash
@@ -16,7 +14,7 @@ PHP Laravel CRUD application to manage projects, users and comments. Only author
 https://github.com/lexaras/PHP_Laravel.git
 
 # change directory
-cd bit-final-project-demo
+cd PHP_Laravel
 
 # install all dependencies
 composer update
@@ -33,15 +31,23 @@ cp .env.expample .env
 # generate app key
 php artisan key:generate
 
-# run migrations and seeders
-php artisan migrate:refresh --seed
+# run migrations
+php artisan migrate
 
-# start application
-php artisan serve
+<img src="assets/migrate_error.png">
 
-# email: admin@admin.com
-# password: password
-```
+As you noticed one migration failed. To pass it we need to register admin user by hand :
+ - name = "admin"
+ - email = "admin@any.com"
+ - password = "anything(min 8 symbols)"
+
+# run migration again
+ php artisan migrate
+
+# run seeders
+ php artisan db:seed 
+
+<img src="assets/migrate_working.png">
 
 ## Screenshots
 
