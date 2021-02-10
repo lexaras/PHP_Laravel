@@ -17,7 +17,7 @@ class ConnectProjectsToUsers extends Migration
     public function up() {
         Schema::table('projects', function (Blueprint $table) {
 	     // Būna useris “admin”, arba galima šioje vietoje sukurti naują userį jei egizistuojantys 
-            $admin_uid = DB::table('users')->where('name', '=', 'Benas')->first('id');
+            $admin_uid = DB::table('users')->where('name', '=', 'admin')->first('id');
             $table->unsignedBigInteger('user_id')->default($admin_uid->id);
             $table->foreign('user_id')
                 ->references('id')->on('users')

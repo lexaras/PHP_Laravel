@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +18,11 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {return view('welcome');})->name('welcome');   //index
 Route::get('/about', function () {return view('about');})->name('about');  //about\
 Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
+Route::get('/comments', [CommentController::class, 'index'])->name('comments.index');
 Route::get('/projects/{id}', [ProjectController::class, 'show'])->name('projects.show');
 Route::post('/projects', [ProjectController::class, 'store']);
 Route::delete('/projects/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
+Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
 Route::put('/projects/{id}', [ProjectController::class, 'update'])->name('projects.update');
 Route::post('/projects/{id}/comments', [ProjectController::class, 'storeProjectComment'])->name('projects.comments.store');
 //Testavimui routai

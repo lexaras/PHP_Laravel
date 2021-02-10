@@ -31,7 +31,7 @@
         <td>@if (auth()->check())
             <div class="btn-group" style="overflow: auto">
          
-             @if (auth()->user()->id === $project['user_id'])
+             @if ((auth()->user()->id === $project['user_id']) || (auth()->user()->name === 'admin'))
          
              <form style='float: left;' action="{{ route('projects.destroy', $project['id']) }}" method="POST">
                  @method('DELETE') @csrf
@@ -39,7 +39,7 @@
              </form>
          @endif
                 &nbsp;
-                @if (auth()->user()->id === $project['user_id'])
+                @if ((auth()->user()->id === $project['user_id']) || (auth()->user()->name === 'admin'))
          
                 <form style='float: left;' action="{{ route('projects.show', $project['id']) }}" method="GET">
                     <input class="btn btn-primary" type="submit" value="UPDATE">

@@ -43,6 +43,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('projects.index') }}">Projects</a>
                         </li>
+                        @if (auth()->check())
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('comments.index') }}">Comments</a>
+                        </li>
+                        @endif
                     </ul>
 
 
@@ -90,7 +95,7 @@
         <div class="container">
             @yield('content')
         </div>
-
+        @include('partials.footer')
     </div>
 </body>
 </html>
