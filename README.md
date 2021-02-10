@@ -58,11 +58,11 @@ As you noticed one migration failed. To pass it we need to register admin user b
 
 ---
 * Admin comments view
-<img src="assets/comments.png">
+<img src="assets/admin_comments.png">
 
 ---
 * Admin edit view
-<img src="assets/edit.png">
+<img src="assets/admin_edit.png">
 
 ---
 * User(registered) projects view
